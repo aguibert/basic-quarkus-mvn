@@ -12,36 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/people")
+@Path("/")
 public class TestService {
 
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public Person find() {
-        System.out.println("@AGG inside find");
-        Person p = Person.findAll().firstResult();
-        System.out.println("@AGG methods:");
-        for (Method m : p.getClass().getDeclaredMethods())
-            if (!Modifier.isStatic(m.getModifiers()) && !Modifier.isTransient(m.getModifiers())) {
-                System.out.println("  " + m);
-                System.out.println("    " + Arrays.toString(m.getAnnotations()));
-            }
-        System.out.println("@AGG fields:");
-        for (Field f : p.getClass().getDeclaredFields())
-            if (!Modifier.isStatic(f.getModifiers()) && !Modifier.isTransient(f.getModifiers())) {
-                System.out.println("  " + f);
-                System.out.println("    " + Arrays.toString(f.getAnnotations()));
-            }
-        return p;
+    public String hello() {
+        return "Hello world";
     }
 
-    @GET
-    @Path("str")
-    public String findStr() {
-        System.out.println("@AGG inside findstr");
-        Person p = Person.findAll().firstResult();
-        // return
-        // Response.ok().entity(Person.findAll().firstResult().toString()).build();
-        return p.toString();
-    }
 }
